@@ -1,0 +1,733 @@
+/* GENERAL RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background: linear-gradient(to bottom, #000000, #05070d); /* Subtle Gradient Depth */
+    font-family: "Inter", sans-serif;
+    overflow-x: hidden;
+    color: #ffffff;
+    -webkit-font-smoothing: antialiased; /* High-end Font Rendering */
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* HERO SECTION */
+.hero-container {
+    min-height: 100vh; /* CHANGED FROM height: 100vh; */
+    height: auto;      /* NEW: Allows the box to expand to fit the text */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0 20px;
+    padding-bottom: 120px; /* NEW: Gives extra room at the bottom so it doesn't hit the arrow */
+    z-index: 1; 
+}
+/* === THE MASSIVE SIGIL (Adjusted for Space) === */
+.hero-sigil-wrap {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 0; /* REMOVED MARGIN (Was 30px) */
+    padding-bottom: 0; /* REMOVED PADDING */
+}
+
+.hero-title {
+    font-size: 2.6rem; 
+    font-weight: 600;  
+    line-height: 1.2;
+    color: #e5e0ff;
+    max-width: 850px;
+    opacity: 0;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    /* REDUCED HAZE: Lowered the spread and opacity of the glow */
+    text-shadow: 0 0 12px rgba(120, 100, 255, 0.15); 
+}
+
+
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    line-height: 1.6; /* Increased readability */
+    color: #b8b2d9;
+    max-width: 800px;
+    margin-top: 0;
+    opacity: 0;
+    text-shadow: 0 0 20px rgba(0,0,0,0.8); /* Readability against glow */
+}
+
+/* Cinematic Sigil Base */
+.hero-sigil {
+    width: 100%;
+    opacity: 0;
+    transform-origin: center center;
+    will-change: transform, opacity, filter;
+    filter: drop-shadow(0 0 18px rgba(145,120,255,0.6)); /* Base shadow */
+    transform: scale(0.85); /* Initial scale */
+}
+
+/* BACKGROUND VOID EFFECT */
+.hero-container::before {
+    content: "";
+    position: absolute;
+    width: 160%;
+    height: 160%;
+    background: radial-gradient(circle at center,
+    rgba(60, 0, 120, 0.25),
+    rgba(0, 0, 0, 0.9) 70%);
+    filter: blur(70px);
+    animation: voidPulse 18s ease-in-out infinite, drift 40s linear infinite;
+}
+@keyframes voidPulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+}
+@keyframes drift {
+    0% { transform: translateY(0px) translateX(0px); }
+    50% { transform: translateY(-40px) translateX(25px); }
+    100% { transform: translateY(0px) translateX(0px); }
+}
+
+
+/* NEW SCROLL INDICATOR (Chevron) */
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: 45px;
+    width: 24px;
+    height: 24px;
+    border-bottom: 2px solid #a58bff;
+    border-right: 2px solid #a58bff;
+    transform: rotate(45deg); /* Rotates square into an arrow */
+    opacity: 0;
+    animation: scrollPulse 2.5s infinite ease-in-out;
+}
+
+@keyframes scrollPulse {
+    0% { transform: rotate(45deg) translate(-5px, -5px); opacity: 0.4; }
+    50% { transform: rotate(45deg) translate(0, 0); opacity: 1; }
+    100% { transform: rotate(45deg) translate(-5px, -5px); opacity: 0.4; }
+}
+
+/* OLD LOGO CLASSES (Keep just in case) */
+.sigil {
+    width: 420px;
+    opacity: 0;
+    filter: drop-shadow(0 0 18px rgba(120, 0, 255, 0.55));
+    z-index: 2;
+}
+.logo {
+    width: 230px;
+    margin-top: 20px;
+    opacity: 0;
+    z-index: 2;
+    animation: breathe 9s ease-in-out infinite;
+}
+@keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.015); }
+}
+.hero-tagline {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    letter-spacing: 0.15rem;
+    opacity: 0;
+    z-index: 2;
+}
+/* SECTION LAYOUT POLISH */
+.content-section {
+    width: 100%;
+    max-width: 800px; /* Tighter width for readability */
+    margin: 120px auto; /* Consistent vertical spacing */
+    text-align: center;
+    padding: 0 25px;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700; 
+    letter-spacing: 0.15rem;
+    margin-bottom: 15px; 
+    color: #b8b8ff;
+    text-transform: uppercase;
+    /* REDUCED HAZE: Tightened the shadow so the text is crisp */
+    text-shadow: 0 0 8px rgba(184, 184, 255, 0.15);
+}
+.section-text {
+    font-size: 1.25rem; /* INCREASED from 1.2rem */
+    line-height: 1.85;  /* INCREASED from 1.7 for breathing room */
+    color: #eaeaea;     /* Slightly brighter white for contrast */
+    max-width: 680px; 
+    margin: 0 auto;   
+}
+
+.about-text, .contact-text {
+    font-size: 1.25rem; /* Matches the new larger homepage size */
+    line-height: 1.85;  /* Matches the new spacing */
+    color: #eaeaea;
+}
+.principle-text {
+    font-size: 1.6rem;
+    letter-spacing: 0.12rem;
+    color: #cfcfff;
+}
+.sweep-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #b8b8ff, transparent);
+    opacity: 0;
+}
+.particle-field {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px);
+    background-size: 4px 4px;
+    opacity: 0.08;
+    animation: particleDrift 60s linear infinite;
+}
+@keyframes particleDrift {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-120px); }
+}
+
+/* PHASE 3 ADDITIONS (ABOUT PAGE) */
+.about-hero-container {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    padding-top: 80px; /* Nav Fix */
+}
+.about-sigil {
+    width: 160px;
+    opacity: 0;
+    filter: drop-shadow(0 0 12px rgba(120,0,255,0.55));
+}
+.about-title {
+    font-size: 2.2rem;
+    letter-spacing: 0.25rem;
+    margin-top: 30px;
+    opacity: 0;
+    color: #d6d6ff;
+}
+.about-subtitle {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: #bcbcff;
+    opacity: 0;
+}
+.about-section {
+    max-width: 860px;
+    margin: 120px auto;
+    text-align: center;
+    padding: 0 20px;
+    opacity: 0;
+}
+.about-heading {
+    font-size: 1.7rem;
+    letter-spacing: 0.18rem;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    color: #c9c9ff;
+}
+
+.principle-quote {
+    font-size: 1.55rem;
+    letter-spacing: 0.12rem;
+    color: #ffffff;
+    margin-top: 10px;
+}
+
+/* CONTACT PAGE */
+.contact-hero-container {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    padding-top: 80px; /* Nav Fix */
+}
+.contact-sigil {
+    width: 160px;
+    opacity: 0;
+    filter: drop-shadow(0 0 12px rgba(120,0,255,0.55));
+}
+.contact-title {
+    font-size: 2.2rem;
+    letter-spacing: 0.25rem;
+    margin-top: 30px;
+    opacity: 0;
+    color: #d6d6ff;
+}
+.contact-subtitle {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: #bcbcff;
+    opacity: 0;
+}
+.contact-section {
+    max-width: 860px;
+    margin: 120px auto;
+    text-align: center;
+    padding: 0 20px;
+    opacity: 0;
+}
+
+.contact-button {
+    display: inline-block;
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    letter-spacing: 0.1rem;
+    color: #ffffff;
+    text-decoration: none;
+    border: 1px solid #b8b8ff;
+    border-radius: 4px;
+    transition: all 0.35s ease;
+}
+.contact-button:hover {
+    background: rgba(120,0,255,0.15);
+    box-shadow: 0 0 15px rgba(120,0,255,0.35);
+}
+
+/* =========================================
+   RESTORING THE DESKTOP NAV (WIDE & CLEAN)
+   ========================================= */
+.nav-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 40px; /* Restored wide padding */
+    display: flex;
+    justify-content: flex-end; /* Keeps links to the right */
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(12px);
+    z-index: 9999;
+}
+
+/* ACTIVE PAGE STYLING */
+.nav-link.active, .mobile-link.active {
+    color: #a58bff !important; /* Signature Ceymirion Violet */
+    text-shadow: 0 0 10px rgba(165, 139, 255, 0.5);
+    border-bottom: 2px solid #a58bff; /* Adds a clean underline on Desktop */
+    padding-bottom: 4px;
+}
+
+/* Mobile specific active tweak (no underline, just glow) */
+@media (max-width: 768px) {
+    .mobile-link.active {
+        border-bottom: none;
+        font-weight: 700;
+    }
+}
+
+.nav-links-desktop {
+    display: flex;
+    gap: 40px; /* RESTORED: Spreads the words out on PC */
+}
+
+.nav-link {
+    color: #dcdcff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.15rem; /* Elegant spacing */
+    transition: 0.3s ease;
+}
+
+/* =========================================
+   MOBILE BUTTON & "X" FIX
+   ========================================= */
+.mobile-nav-toggle {
+    display: none; /* Hidden on PC by default */
+}
+
+@media (max-width: 768px) {
+    .nav-links-desktop { display: none; } /* Hide PC links on phone */
+
+    .nav-bar {
+        padding: 15px 25px;
+    }
+
+    .mobile-nav-toggle {
+        display: flex; /* Show the button on phone */
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 10001; /* Keeps it ABOVE the menu so you can click X to close */
+        width: 40px;
+        height: 40px;
+    }
+
+    /* THE VISIBLE HAMBURGER/X */
+    .hamburger {
+        display: block;
+        width: 28px;
+        height: 2px;
+        background: #a58bff !important; /* Force it to be violet */
+        position: relative;
+        transition: 0.3s;
+    }
+
+    .hamburger::before, .hamburger::after {
+        content: "";
+        width: 28px;
+        height: 2px;
+        background: #a58bff !important;
+        position: absolute;
+        left: 0;
+        transition: 0.3s;
+    }
+
+    .hamburger::before { top: -9px; }
+    .hamburger::after { bottom: -9px; }
+
+    /* FORCE THE X TO APPEAR */
+    .mobile-nav-toggle.active .hamburger {
+        background: transparent !important; /* Hides middle bar */
+    }
+    .mobile-nav-toggle.active .hamburger::before {
+        transform: rotate(45deg);
+        top: 0;
+    }
+    .mobile-nav-toggle.active .hamburger::after {
+        transform: rotate(-45deg);
+        bottom: 0;
+    }
+
+    /* THE FULL-SCREEN OVERLAY */
+    .mobile-nav-overlay {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: -100%; 
+        width: 100%;
+        height: 100%;
+        background: rgba(5, 7, 13, 0.98);
+        backdrop-filter: blur(20px);
+        z-index: 10000;
+        transition: right 0.4s ease-in-out;
+    }
+    .mobile-nav-overlay.active { right: 0; }
+}
+.footer {
+    width: 100%;
+    text-align: center;
+    padding: 30px 0;
+    /* BRIGHTER TEXT: Added !important to override the dark #666 in the HTML */
+    color: #9292ab !important; 
+    font-size: 0.85rem;
+    margin-top: 150px;
+}
+
+/* MOBILE RESPONSIVENESS PATCH (MUST BE LAST) */
+@media (max-width: 768px) {
+    /* Mobile Sigil Size */
+    .hero-sigil-wrap {
+        width: 280px; 
+        height: 280px;
+    }
+    
+    .logo {
+        width: 80%;
+        max-width: 300px;
+        margin-top: 10px;
+    }
+    
+    .hero-tagline {
+        font-size: 0.6rem;
+        letter-spacing: 0.1rem;
+        padding: 0 15px;
+        text-align: center;
+    }
+    
+    
+    
+}
+
+/* MOBILE RESPONSIVENESS PATCH (FINAL) */
+@media (max-width: 768px) {
+    
+    /* 1. Force the Giant Logo to shrink on mobile */
+    /* We use !important to override the HTML inline style */
+.hero-title {
+    font-size: 1.7rem; /* Increased by 15-20% */
+    font-weight: 400;  /* Slightly bolder */
+    line-height: 1;
+    color: #e5e0ff;
+    max-width: 850px;
+    opacity: 0;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    /* Soft ambient glow behind text for contrast */
+    text-shadow: 0 0 30px rgba(120, 100, 255, 0.2); 
+}
+
+.hero-subtitle {
+    font-size: 0.8rem;
+    line-height: 1.6; /* Increased readability */
+    color: #b8b2d9;
+    max-width: 800px;
+    margin-top: 0;
+    opacity: 0;
+    text-shadow: 0 0 20px rgba(0,0,0,0.8); /* Readability against glow */
+}
+
+/* Mobile Typography Readability Boost */
+    .section-text, .about-text, .contact-text {
+        font-size: 1.15rem !important; 
+        line-height: 1.75 !important;
+        padding: 0 10px; /* Gives the text a little breathing room from the edge of the phone */
+    }
+
+    /* 4. Fix Navigation Bar for Phone */
+  
+}
+
+@media (max-width: 768px) {
+    /* ... your existing mobile code ... */
+
+    /* 1. THE MISSING LINK STYLING: This makes the mobile menu actually readable */
+    .mobile-nav-content {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .mobile-link {
+        font-size: 1.5rem !important;
+        color: #dcdcff !important;
+        text-decoration: none;
+        letter-spacing: 0.2rem;
+        text-transform: uppercase;
+        transition: 0.3s;
+    }
+
+    /* 2. THE OVERLAY DEPTH: Ensure the background is dark enough */
+    .mobile-nav-overlay {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* ... existing properties ... */
+    }
+}
+
+/* =========================================
+   NEW BATCH 1 ELEMENTS
+   ========================================= */
+/* =========================================
+   HERO CREDIBILITY TICKER (Infinite Loop)
+   ========================================= */
+
+/* =========================================
+   INFINITE MOTION ENGINE (Hard Reset)
+   ========================================= */
+
+/* =========================================
+   HERO CREDIBILITY TICKER (Infinite Loop)
+   ========================================= */
+
+.hero-credibility {
+    width: 100%;
+    max-width: 800px; /* Keeps the loop centered neatly under the text */
+    margin: 40px auto 0 auto;
+    overflow: hidden;
+    opacity: 0; /* Kept at 0 so your GSAP animation still fades it in! */
+    
+    /* This creates a beautiful cinematic fade on the left and right edges! */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.ticker-track {
+    display: flex;
+    width: max-content;
+    gap: 25px; /* The perfect breathing room between items */
+    font-size: 1.2rem; /* Big, premium size */
+    color: #a58bff;
+    align-items: center;
+    white-space: nowrap; /* Forces it all onto a single line */
+    
+    /* The magic scrolling animation. Change '25s' to make it faster or slower */
+    animation: scrollTicker 25s linear infinite; 
+}
+
+.ticker-track .dot {
+    opacity: 0.4;
+}
+
+/* The Keyframes that drive the loop */
+@keyframes scrollTicker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
+}
+.hero-credibility .dot {
+    opacity: 0.4;
+}
+
+/* 2. The 7-Layer Architecture List */
+.layer-list {
+    text-align: left;
+    max-width: 650px;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(165, 139, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.layer-item {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.layer-item:last-child {
+    border-bottom: none;
+}
+.layer-item strong {
+    color: #a58bff;
+    margin-right: 10px;
+}
+
+/* 3. Closing Buttons */
+.button-row {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.btn-primary, .btn-outline {
+    padding: 14px 30px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+.btn-primary {
+    background: #a58bff;
+    color: #000;
+    box-shadow: 0 0 20px rgba(165, 139, 255, 0.2);
+}
+.btn-primary:hover {
+    background: #bda8ff;
+    box-shadow: 0 0 30px rgba(165, 139, 255, 0.4);
+}
+.btn-outline {
+    border: 1px solid rgba(165, 139, 255, 0.5);
+    color: #a58bff;
+}
+.btn-outline:hover {
+    border-color: #a58bff;
+    background: rgba(165, 139, 255, 0.1);
+}
+
+
+/* =========================================
+   UNIFIED FOOTER & BRAND SEAL (Image Spacing)
+   ========================================= */
+/* =========================================
+   UNIFIED FOOTER & BRAND SEAL (Tight Spacing)
+   ========================================= */
+
+/* 1. This kills the massive gap currently sitting under your buttons */
+#closing, #closing-about, #closing-contact {
+    margin-bottom: 40px !important; 
+}
+
+/* 2. This tightens up the footer itself */
+.site-footer {
+    width: 100%;
+    text-align: center;
+    padding: 30px 20px 50px; /* Shrunk the top padding so the seal moves up */
+    margin-top: 0px !important; /* Removed the extra top margin */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.footer-seal {
+    color: #cfcfff; 
+    font-size: 0.95rem; 
+    letter-spacing: 0.08rem;
+    font-weight: 400;
+    margin-bottom: 100px; /* Keeps the big gap below the seal, before the copyright */
+}
+
+.footer-top {
+    color: #7a7a96; 
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+
+
+
+
+
+/* THE LOGO-COLORED BRAND SEAL */
+.footer-seal p {
+    color: #a58bff; /* This is your signature Ceymirion Violet */
+    font-size: 1.05rem; 
+    letter-spacing: 0.05rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Individual words start invisible */
+.footer-seal span {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(5px); /* Adds a misty, cinematic reveal */
+    transform: translateY(10px);
+}
+
+
+/* =========================================
+   BRAND PRONUNCIATION LINE
+   ========================================= */
+.brand-pronunciation {
+    font-size: 0.9rem;          /* Smaller than subtitle (1.25rem) */
+    letter-spacing: 0.12rem;    /* Elegant tracking */
+    color: #bda8ff;             /* Brighter than ticker, softer than title */
+    margin-top: 15px;           /* Spaced below subtitle */
+    margin-bottom: 5px;         /* Tight to the ticker below */
+    opacity: 0;                 /* Hidden for GSAP reveal */
+    font-weight: 300;
+    text-transform: uppercase;
+    font-style: italic;         /* Adds a subtle "decoding" feel */
+    text-shadow: 0 0 10px rgba(165, 139, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+    .brand-pronunciation {
+        font-size: 0.75rem;     /* Scales down for mobile */
+        letter-spacing: 0.1rem;
+    }
+}
+
