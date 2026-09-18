@@ -37,13 +37,6 @@ body {
     padding-bottom: 0; /* REMOVED PADDING */
 }
 
-/* SYNCYR interactive reveal (replaces the static sigil as the hero opener) */
-.syncyr-reveal-wrap {
-    width: 100%;
-    max-width: 1600px;
-    margin: 0 auto 30px;
-}
-
 .hero-title {
     font-size: 2.6rem; 
     font-weight: 600;  
