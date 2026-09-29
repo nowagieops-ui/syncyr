@@ -45,7 +45,8 @@ function highlightActivePage() {
     
     allLinks.forEach(link => {
         link.classList.remove('active');
-        const linkTarget = link.getAttribute('href').replace(".html", "");
+        let linkTarget = link.getAttribute('href').replace(".html", "");
+        if (linkTarget !== "/") linkTarget = linkTarget.replace(/^\//, "");
         
         if (path === linkTarget) {
             link.classList.add('active');
