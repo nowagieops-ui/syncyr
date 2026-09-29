@@ -324,6 +324,11 @@ body {
     z-index: 9999;
 }
 
+/* Mobile menu is hidden on desktop; the max-width: 768px block below shows it */
+.mobile-nav-overlay {
+    display: none;
+}
+
 /* ACTIVE PAGE STYLING */
 .nav-link.active, .mobile-link.active {
     color: #a58bff !important; /* Signature Ceymirion Violet */
